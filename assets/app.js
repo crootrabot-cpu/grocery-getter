@@ -1,19 +1,25 @@
 const demoItems = ["bananas", "milk", "eggs", "spinach", "pasta", "strawberries"];
 
-const artMap = {
-  bananas: { emoji: "🍌", note: "Bright yellow bunch. Usually near the produce wall." },
-  milk: { emoji: "🥛", note: "Cold dairy case. Grab the right size before you move on." },
-  eggs: { emoji: "🥚", note: "Fragile. Quick visual reminder so you do not forget them." },
-  spinach: { emoji: "🥬", note: "Leafy greens section. Fresh bag or clamshell." },
-  pasta: { emoji: "🍝", note: "Dry goods aisle. Easy to miss on a fast run." },
-  strawberries: { emoji: "🍓", note: "Fresh produce. Check color before tossing them in." },
-  bread: { emoji: "🍞", note: "Bakery or bread aisle. Soft grab near the end of the trip." },
-  apples: { emoji: "🍎", note: "Produce section. Quick visual helps you avoid the wrong variety." },
-  chicken: { emoji: "🍗", note: "Meat section. Keep it cold and grab it late in the run." },
-  yogurt: { emoji: "🥣", note: "Dairy case. Scan flavors fast and move." },
-  coffee: { emoji: "☕", note: "Aisle staple. Good example of a dry-goods swipe card." },
-  rice: { emoji: "🍚", note: "Pantry shelf. Heavy item, often easy to skip accidentally." },
+const library = {
+  bananas: { file: "assets/illustrations/bananas.svg", note: "Produce section.", aliases: ["banana"] },
+  milk: { file: "assets/illustrations/milk.svg", note: "Cold dairy case.", aliases: [] },
+  eggs: { file: "assets/illustrations/eggs.svg", note: "Dairy or refrigerated wall.", aliases: ["egg"] },
+  spinach: { file: "assets/illustrations/spinach.svg", note: "Leafy greens section.", aliases: [] },
+  pasta: { file: "assets/illustrations/pasta.svg", note: "Dry goods aisle.", aliases: ["spaghetti"] },
+  strawberries: { file: "assets/illustrations/strawberries.svg", note: "Produce section.", aliases: ["strawberry"] },
+  bread: { file: "assets/illustrations/bread.svg", note: "Bakery or bread aisle.", aliases: [] },
+  apples: { file: "assets/illustrations/apples.svg", note: "Produce section.", aliases: ["apple"] },
+  chicken: { file: "assets/illustrations/chicken.svg", note: "Meat section.", aliases: [] },
+  yogurt: { file: "assets/illustrations/yogurt.svg", note: "Dairy case.", aliases: [] },
+  coffee: { file: "assets/illustrations/coffee.svg", note: "Pantry aisle.", aliases: [] },
+  rice: { file: "assets/illustrations/rice.svg", note: "Pantry aisle.", aliases: [] },
 };
+
+const aliasLookup = Object.entries(library).reduce((acc, [key, value]) => {
+  acc[key] = key;
+  value.aliases.forEach((alias) => { acc[alias] = key; });
+  return acc;
+}, {});
 
 const input = document.getElementById("grocery-input");
 const demoFillButton = document.getElementById("demo-fill");
@@ -21,7 +27,7 @@ const shopButton = document.getElementById("shop-button");
 const clearButton = document.getElementById("clear-button");
 const shoppingStage = document.getElementById("shopping-stage");
 const swipeCard = document.getElementById("swipe-card");
-const cardVisual = document.getElementById("card-visual");
+const cardImage = document.getElementById("card-image");
 const cardItemName = document.getElementById("card-item-name");
 const cardItemNote = document.getElementById("card-item-note");
 const progressPill = document.getElementById("progress-pill");
@@ -29,13 +35,8 @@ const remainingList = document.getElementById("remaining-list");
 const grabbedList = document.getElementById("grabbed-list");
 const remainingCount = document.getElementById("remaining-count");
 const grabbedCount = document.getElementById("grabbed-count");
-const grabbedButton = document.getElementById("grabbed-button");
-const skipButton = document.getElementById("skip-button");
 
-const state = {
-  queue: [],
-  grabbed: [],
-};
+const state = { queue: [], grabbed: [] };
 
 function normalizeItem(raw) {
   return raw.trim().replace(/^[-*•]\s*/, "").toLowerCase();
@@ -46,16 +47,60 @@ function titleize(text) {
 }
 
 function parseInput(value) {
-  return value
-    .split(/[\n,]/)
-    .map(normalizeItem)
-    .filter(Boolean);
+  return value.split(/[\n,]/).map(normalizeItem).filter(Boolean);
+}
+
+function resolveKey(item) {
+  const cleaned = item.replace(/s$/, "");
+  return aliasLookup[item] || aliasLookup[cleaned] || item;
+}
+
+function categoryFor(item) {
+  if (["spinach", "bananas", "apples", "strawberries"].includes(item)) return "produce";
+  if (["milk", "eggs", "yogurt"].includes(item)) return "dairy";
+  if (["chicken"].includes(item)) return "protein";
+  return "pantry";
+}
+
+function fallbackDataUri(item) {
+  const title = titleize(item);
+  const category = categoryFor(item);
+  const themes = {
+    produce: ["#e7ffe8", "#4fcb75", "#1d6b34", "leaf"],
+    dairy: ["#eaf5ff", "#7abfff", "#24537d", "drop"],
+    protein: ["#fff0ea", "#dd8d63", "#7b3b25", "arc"],
+    pantry: ["#fff6e6", "#efc56a", "#7a5b1d", "grain"],
+  };
+  const [bg, accent, dark, motif] = themes[category];
+  const motifSvg = {
+    leaf: '<path d="M262 110c-72 24-121 101-102 169 18 66 93 115 162 94 58-17 91-67 91-124 0-82-72-165-151-139z" fill="#4fcb75" opacity="0.22"/>',
+    drop: '<path d="M256 118c56 70 94 118 94 174 0 58-42 106-94 106s-94-48-94-106c0-56 38-104 94-174z" fill="#7abfff" opacity="0.20"/>',
+    arc: '<path d="M132 286c0-74 54-124 124-124s124 50 124 124-54 124-124 124-124-50-124-124z" fill="#dd8d63" opacity="0.22"/>',
+    grain: '<path d="M158 338c28-84 79-154 98-154s70 70 98 154" fill="none" stroke="#efc56a" stroke-width="20" stroke-linecap="round" opacity="0.35"/>',
+  }[motif];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="56" fill="${bg}"/>${motifSvg}<circle cx="256" cy="232" r="108" fill="${accent}" opacity="0.28"/><text x="256" y="280" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="168" font-weight="800" fill="${dark}">${title[0]}</text><text x="256" y="412" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="${dark}">${title}</text></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
 function getItemArt(item) {
-  const found = artMap[item];
-  if (found) return found;
-  return { emoji: "🛒", note: `Illustration placeholder for ${titleize(item)}. Add richer custom art later.` };
+  const key = resolveKey(item);
+  const entry = library[key];
+  if (entry) {
+    return { src: entry.file, note: entry.note, label: titleize(item) };
+  }
+  return {
+    src: fallbackDataUri(item),
+    note: "Generated fallback art.",
+    label: titleize(item),
+  };
+}
+
+function renderListMarkup(items, emptyText) {
+  if (!items.length) return `<li>${emptyText}</li>`;
+  return items.map((item) => {
+    const art = getItemArt(item);
+    return `<li class="list-item-row"><img src="${art.src}" alt="" class="list-thumb" /><span>${titleize(item)}</span></li>`;
+  }).join("");
 }
 
 function renderLists() {
@@ -65,44 +110,38 @@ function renderLists() {
   remainingList.className = `item-list${state.queue.length ? "" : " empty-list"}`;
   grabbedList.className = `item-list${state.grabbed.length ? "" : " empty-list"}`;
 
-  remainingList.innerHTML = state.queue.length
-    ? state.queue.map((item) => `<li>${titleize(item)}</li>`).join("")
-    : "<li>Add items and tap Shop.</li>";
+  remainingList.innerHTML = renderListMarkup(state.queue, "Add items and tap Shop.");
+  grabbedList.innerHTML = renderListMarkup(state.grabbed, "Nothing grabbed yet.");
+}
 
-  grabbedList.innerHTML = state.grabbed.length
-    ? state.grabbed.map((item) => `<li>${titleize(item)}</li>`).join("")
-    : "<li>Nothing grabbed yet.</li>";
+function resetCardTransform() {
+  swipeCard.style.transform = "translateX(0px) rotate(0deg)";
+  swipeCard.style.opacity = "1";
 }
 
 function renderCard() {
   renderLists();
-
   const total = state.queue.length + state.grabbed.length;
   progressPill.textContent = `${state.grabbed.length} / ${total} grabbed`;
 
   if (!state.queue.length) {
     shoppingStage.hidden = total === 0;
-    cardVisual.textContent = "✅";
+    cardImage.src = fallbackDataUri("done");
+    cardImage.alt = "Trip complete";
     cardItemName.textContent = total ? "Trip complete" : "No items yet";
-    cardItemNote.textContent = total
-      ? "You cleared the list. Nice."
-      : "Add a few grocery items, then tap Shop.";
-    grabbedButton.disabled = true;
-    skipButton.disabled = true;
-    swipeCard.style.transform = "translateX(0px) rotate(0deg)";
+    cardItemNote.textContent = total ? "You cleared the list. Nice." : "Add a few grocery items, then tap Shop.";
+    resetCardTransform();
     return;
   }
 
   shoppingStage.hidden = false;
-  grabbedButton.disabled = false;
-  skipButton.disabled = false;
-
   const nextItem = state.queue[0];
   const art = getItemArt(nextItem);
-  cardVisual.textContent = art.emoji;
-  cardItemName.textContent = titleize(nextItem);
+  cardImage.src = art.src;
+  cardImage.alt = art.label;
+  cardItemName.textContent = art.label;
   cardItemNote.textContent = art.note;
-  swipeCard.style.transform = "translateX(0px) rotate(0deg)";
+  resetCardTransform();
 }
 
 function startShopping(items) {
@@ -118,7 +157,7 @@ function markGrabbed() {
 }
 
 function skipItem() {
-  if (state.queue.length <= 1) return;
+  if (!state.queue.length) return;
   const first = state.queue.shift();
   state.queue.push(first);
   renderCard();
@@ -146,9 +185,6 @@ clearButton.addEventListener("click", () => {
   renderLists();
 });
 
-grabbedButton.addEventListener("click", markGrabbed);
-skipButton.addEventListener("click", skipItem);
-
 let pointerStartX = 0;
 let currentOffsetX = 0;
 let dragging = false;
@@ -165,8 +201,9 @@ swipeCard.addEventListener("pointerdown", (event) => {
 swipeCard.addEventListener("pointermove", (event) => {
   if (!dragging) return;
   currentOffsetX = event.clientX - pointerStartX;
-  const rotation = currentOffsetX / 20;
+  const rotation = currentOffsetX / 18;
   swipeCard.style.transform = `translateX(${currentOffsetX}px) rotate(${rotation}deg)`;
+  swipeCard.style.opacity = String(Math.max(0.78, 1 - Math.abs(currentOffsetX) / 560));
 });
 
 function finishSwipe(event) {
@@ -175,17 +212,17 @@ function finishSwipe(event) {
   swipeCard.classList.remove("is-dragging");
   swipeCard.releasePointerCapture?.(event.pointerId);
 
-  if (currentOffsetX > 120) {
+  if (currentOffsetX > 110) {
     markGrabbed();
     return;
   }
 
-  if (currentOffsetX < -120) {
+  if (currentOffsetX < -110) {
     skipItem();
     return;
   }
 
-  swipeCard.style.transform = "translateX(0px) rotate(0deg)";
+  resetCardTransform();
 }
 
 swipeCard.addEventListener("pointerup", finishSwipe);

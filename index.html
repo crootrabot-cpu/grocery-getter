@@ -15,21 +15,21 @@
         <div class="eyebrow">Swipe-first grocery assistant</div>
         <h1>Grocery Getter</h1>
         <p class="hero-copy">
-          Dump your list, tap <strong>Shop</strong>, then swipe right when each item is in your cart.
-          Big visuals. Zero tiny checkbox nonsense.
+          Dump your list, tap <strong>Shop</strong>, then just look at the picture and swipe right when it lands in your cart.
+          Picture first. Reading optional.
         </p>
         <div class="hero-stats">
           <div>
             <span class="stat-label">Mode</span>
-            <strong>One-handed shopping</strong>
+            <strong>Picture-first shopping</strong>
           </div>
           <div>
             <span class="stat-label">Best for</span>
-            <strong>Fast grocery runs</strong>
+            <strong>One-handed fast runs</strong>
           </div>
           <div>
-            <span class="stat-label">Prototype</span>
-            <strong>Static browser demo</strong>
+            <span class="stat-label">Artwork</span>
+            <strong>Local library + smart fallback</strong>
           </div>
         </div>
       </section>
@@ -49,7 +49,7 @@
           <button id="clear-button" class="secondary-button" type="button">Clear</button>
         </div>
         <p class="helper-copy">
-          Separate items with commas or new lines. Voice input can be layered in later; this first pass focuses on the shopping flow.
+          Separate items with commas or new lines. Common groceries use local illustrations. Unknown items get generated fallback art so you still get a visual card.
         </p>
       </section>
 
@@ -57,7 +57,7 @@
         <div class="stage-header">
           <div>
             <div class="eyebrow">Shopping mode</div>
-            <h2 id="stage-title">Grab the next item</h2>
+            <h2 id="stage-title">Look down. Grab it. Swipe right.</h2>
           </div>
           <div class="stage-meta">
             <span id="progress-pill" class="progress-pill">0 / 0 grabbed</span>
@@ -66,22 +66,19 @@
 
         <div class="card-stack-wrap">
           <div id="swipe-card" class="swipe-card" aria-live="polite">
-            <div class="swipe-card-visual" id="card-visual"></div>
+            <div class="swipe-card-visual">
+              <img id="card-image" class="card-image" alt="" />
+            </div>
             <div class="swipe-card-body">
               <div class="item-chip">Next item</div>
               <h3 id="card-item-name">Bananas</h3>
-              <p id="card-item-note" class="card-note">Bright yellow bunch. Produce section.</p>
+              <p id="card-item-note" class="card-note">Produce section.</p>
             </div>
             <div class="swipe-hint-row">
               <span>← skip</span>
               <span>swipe right when grabbed →</span>
             </div>
           </div>
-        </div>
-
-        <div class="swipe-actions">
-          <button id="skip-button" class="secondary-button" type="button">Skip</button>
-          <button id="grabbed-button" class="primary-button" type="button">Got it</button>
         </div>
       </section>
 
