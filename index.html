@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Getter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero panel">
+        <div class="eyebrow">Swipe-first grocery assistant</div>
+        <h1>Grocery Getter</h1>
+        <p class="hero-copy">
+          Dump your list, tap <strong>Shop</strong>, then swipe right when each item is in your cart.
+          Big visuals. Zero tiny checkbox nonsense.
+        </p>
+        <div class="hero-stats">
+          <div>
+            <span class="stat-label">Mode</span>
+            <strong>One-handed shopping</strong>
+          </div>
+          <div>
+            <span class="stat-label">Best for</span>
+            <strong>Fast grocery runs</strong>
+          </div>
+          <div>
+            <span class="stat-label">Prototype</span>
+            <strong>Static browser demo</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="composer panel">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">List capture</div>
+            <h2>What do you need?</h2>
+          </div>
+          <button id="demo-fill" class="ghost-button" type="button">Load demo list</button>
+        </div>
+        <label class="input-label" for="grocery-input">Say it or type it</label>
+        <textarea id="grocery-input" rows="5" placeholder="milk, eggs, bananas, pasta, strawberries"></textarea>
+        <div class="composer-actions">
+          <button id="shop-button" class="primary-button" type="button">Shop</button>
+          <button id="clear-button" class="secondary-button" type="button">Clear</button>
+        </div>
+        <p class="helper-copy">
+          Separate items with commas or new lines. Voice input can be layered in later; this first pass focuses on the shopping flow.
+        </p>
+      </section>
+
+      <section class="shopping-stage panel" id="shopping-stage" hidden>
+        <div class="stage-header">
+          <div>
+            <div class="eyebrow">Shopping mode</div>
+            <h2 id="stage-title">Grab the next item</h2>
+          </div>
+          <div class="stage-meta">
+            <span id="progress-pill" class="progress-pill">0 / 0 grabbed</span>
+          </div>
+        </div>
+
+        <div class="card-stack-wrap">
+          <div id="swipe-card" class="swipe-card" aria-live="polite">
+            <div class="swipe-card-visual" id="card-visual"></div>
+            <div class="swipe-card-body">
+              <div class="item-chip">Next item</div>
+              <h3 id="card-item-name">Bananas</h3>
+              <p id="card-item-note" class="card-note">Bright yellow bunch. Produce section.</p>
+            </div>
+            <div class="swipe-hint-row">
+              <span>← skip</span>
+              <span>swipe right when grabbed →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swipe-actions">
+          <button id="skip-button" class="secondary-button" type="button">Skip</button>
+          <button id="grabbed-button" class="primary-button" type="button">Got it</button>
+        </div>
+      </section>
+
+      <section class="status-grid">
+        <article class="panel queue-panel">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Queue</div>
+              <h2>Still to grab</h2>
+            </div>
+            <span class="count-badge" id="remaining-count">0</span>
+          </div>
+          <ul id="remaining-list" class="item-list empty-list">
+            <li>Add items and tap Shop.</li>
+          </ul>
+        </article>
+
+        <article class="panel queue-panel success-panel">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Cart</div>
+              <h2>Grabbed</h2>
+            </div>
+            <span class="count-badge success" id="grabbed-count">0</span>
+          </div>
+          <ul id="grabbed-list" class="item-list empty-list">
+            <li>Nothing grabbed yet.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

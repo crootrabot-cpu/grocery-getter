@@ -1,0 +1,345 @@
+:root {
+  --bg: #07111f;
+  --bg-accent: #0f1f37;
+  --panel: rgba(11, 23, 41, 0.82);
+  --panel-border: rgba(160, 202, 255, 0.12);
+  --text: #edf4ff;
+  --muted: #9fb4d1;
+  --primary: #7bf1b8;
+  --primary-strong: #4adf98;
+  --warning: #ffd36f;
+  --danger: #ff8f8f;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(74, 223, 152, 0.14), transparent 28%),
+    radial-gradient(circle at right, rgba(123, 181, 255, 0.16), transparent 30%),
+    linear-gradient(180deg, #091321 0%, #050b14 100%);
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+
+.hero,
+.composer,
+.shopping-stage,
+.queue-panel {
+  padding: 24px;
+}
+
+.hero {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+h1 {
+  font-size: clamp(2.4rem, 8vw, 4.8rem);
+  line-height: 0.95;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.hero-copy,
+.helper-copy,
+.card-note,
+.item-list,
+.stat-label,
+.input-label {
+  color: var(--muted);
+}
+
+.hero-copy {
+  max-width: 44rem;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.hero-stats,
+.status-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.hero-stats {
+  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.hero-stats div {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.78rem;
+  margin-bottom: 8px;
+}
+
+.composer {
+  margin-bottom: 18px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-heading.compact {
+  align-items: center;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid rgba(173, 206, 255, 0.18);
+  background: rgba(5, 10, 18, 0.58);
+  color: var(--text);
+  border-radius: 22px;
+  padding: 18px 18px;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 138px;
+}
+
+textarea:focus {
+  outline: 2px solid rgba(123, 241, 184, 0.45);
+  outline-offset: 2px;
+}
+
+.composer-actions,
+.swipe-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #042110;
+  box-shadow: 0 14px 30px rgba(74, 223, 152, 0.28);
+}
+
+.secondary-button,
+.ghost-button {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ghost-button {
+  padding: 10px 14px;
+}
+
+.helper-copy {
+  font-size: 0.92rem;
+  margin-top: 12px;
+}
+
+.shopping-stage {
+  margin-bottom: 18px;
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.progress-pill,
+.count-badge,
+.item-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.progress-pill,
+.count-badge {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.count-badge.success {
+  background: rgba(74, 223, 152, 0.16);
+  color: var(--primary);
+}
+
+.card-stack-wrap {
+  min-height: 420px;
+}
+
+.swipe-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(11, 31, 51, 0.9), rgba(6, 15, 27, 0.94));
+  border: 1px solid rgba(164, 203, 255, 0.16);
+  padding: 20px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.swipe-card.is-dragging {
+  transition: none;
+}
+
+.swipe-card-visual {
+  height: 220px;
+  border-radius: 24px;
+  margin-bottom: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 5rem;
+  background: radial-gradient(circle at top, rgba(123, 241, 184, 0.22), transparent 32%), linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+}
+
+.swipe-card-body h3 {
+  font-size: clamp(2rem, 7vw, 3rem);
+  margin: 12px 0 10px;
+}
+
+.item-chip {
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  background: rgba(255, 211, 111, 0.14);
+  color: var(--warning);
+}
+
+.card-note {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.swipe-hint-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.status-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.item-list li {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.success-panel .item-list li {
+  border-color: rgba(123, 241, 184, 0.12);
+}
+
+.empty-list li {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    width: min(100% - 16px, 100%);
+    padding-top: 12px;
+  }
+
+  .hero,
+  .composer,
+  .shopping-stage,
+  .queue-panel {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .section-heading,
+  .stage-header,
+  .composer-actions,
+  .swipe-actions,
+  .swipe-hint-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-stack-wrap,
+  .swipe-card {
+    min-height: 360px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
