@@ -1,0 +1,98 @@
+{
+  "apples": {
+    "fetched_at": "2026-04-30T20:16:42.925244+00:00",
+    "query": "apple fruit grocery",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/0/03/A_display_of_apples_marked_with_prices_at_a_local_grocery_store_in_Palapye%2CBotswana.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/apples.jpg",
+    "title": "File:A display of apples marked with prices at a local grocery store in Palapye,Botswana.jpg"
+  },
+  "bananas": {
+    "fetched_at": "2026-04-30T20:16:36.085941+00:00",
+    "query": "bananas food",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Bananas_on_black_background_02.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/bananas.jpg",
+    "title": "File:Bananas on black background 02.jpg"
+  },
+  "bread": {
+    "fetched_at": "2026-04-30T20:16:42.235990+00:00",
+    "query": "sliced bread",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Fresh_made_bread_05.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/bread.jpg",
+    "title": "File:Fresh made bread 05.jpg"
+  },
+  "chicken breast": {
+    "fetched_at": "2026-04-30T20:16:43.768747+00:00",
+    "query": "raw chicken breast",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/CHICKEN_BREAST.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/chicken-breast.jpg",
+    "title": "File:CHICKEN BREAST.jpg"
+  },
+  "coffee": {
+    "fetched_at": "2026-04-30T20:16:45.922517+00:00",
+    "query": "coffee beans bag",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/A_bag_of_coffee_J1.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/coffee.jpg",
+    "title": "File:A bag of coffee J1.jpg"
+  },
+  "eggs": {
+    "fetched_at": "2026-04-30T20:16:37.971003+00:00",
+    "query": "egg carton grocery",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/9/93/GroceryStoreEggs2.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/eggs.jpg",
+    "title": "File:GroceryStoreEggs2.jpg"
+  },
+  "milk": {
+    "fetched_at": "2026-04-30T20:16:36.985735+00:00",
+    "query": "whole milk aisle",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Whole_milk_aisle_%2817132962560%29.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/milk.jpg",
+    "title": "File:Whole milk aisle (17132962560).jpg"
+  },
+  "pasta": {
+    "fetched_at": "2026-04-30T20:16:40.241827+00:00",
+    "query": "pasta package",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Pasta%2C_pasta%2C_and_pasta_%289875883513%29.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/pasta.jpg",
+    "title": "File:Pasta, pasta, and pasta (9875883513).jpg"
+  },
+  "rice": {
+    "fetched_at": "2026-04-30T20:16:47.035375+00:00",
+    "query": "bag of rice",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Bag_of_rice_20221028_150305.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/rice.jpg",
+    "title": "File:Bag of rice 20221028 150305.jpg"
+  },
+  "spinach": {
+    "fetched_at": "2026-04-30T20:19:57.160337+00:00",
+    "query": "fresh spinach leaves",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Fresh_Spinach_leaves.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/spinach.jpg",
+    "title": "File:Fresh Spinach leaves.jpg"
+  },
+  "strawberries": {
+    "fetched_at": "2026-04-30T20:16:41.250488+00:00",
+    "query": "strawberries in plastic bin",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Strawberries_in_plastic_bin.JPG",
+    "source": "wikimedia",
+    "src": "assets/photos/strawberries.jpg",
+    "title": "File:Strawberries in plastic bin.JPG"
+  },
+  "yogurt": {
+    "fetched_at": "2026-04-30T20:16:44.543991+00:00",
+    "query": "yogurt container",
+    "remote_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Chiobani_yogurt.jpg",
+    "source": "wikimedia",
+    "src": "assets/photos/yogurt.jpg",
+    "title": "File:Chiobani yogurt.jpg"
+  }
+}
